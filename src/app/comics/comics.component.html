@@ -1,0 +1,76 @@
+  <br>
+  <hr>
+  <div class="container" >
+    <!-- Right-aligned -->
+    <ul class="pagination justify-content-end" style="margin:20px 0">
+      <li class="page-item" *ngFor="let pa of pag" [class]="pa.active" (click)="paginate(pa.id)"><a class="page-link" href="#">{{pa.id}}</a></li>
+      
+    </ul>
+    <div class="row">
+        <div class="col-sm-6" *ngFor="let com of comics; index as i">
+            <div class="card" *ngIf="com.is">
+                <img class="card-img-top" src="{{com.thumbnail.path}}.{{com.thumbnail.extension}}" alt="Card image" style="width:100%">
+                <div class="card-body">
+                  <h4 class="card-title">{{com.title}}</h4>
+                  <p class="card-text">{{com.description }}</p>
+                  <div class="row">
+                    <div class="col">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="getDetails(com.characters.collectionURI)">
+                        Characters
+                      </button>
+                    </div>
+                    <div class="col">
+                      
+                      <ul class="pagination pagination-sm" *ngIf="com.stars.length==5">
+                        <li class="page-item" *ngFor="let st of com.stars" (click)="stars(i,st)"><a class="page-link red"><i class="material-icons">stars</i></a></li>
+                      </ul>
+                      <ul class="pagination pagination-sm" *ngIf="com.stars.length!=5">
+                        <li class="page-item" *ngFor="let st of com.stars"><a disabled class="page-link"><i class="material-icons">stars</i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+        </div>
+       
+    </div> 
+   
+    
+  </div>
+
+   <!-- The Modal -->
+   <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Characters Information</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div *ngFor="let det of details">
+                <div class="row">
+                    <div class="col">
+                        <img src="{{det.thumbnail.path}}.{{det.thumbnail.extension}}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236"> 
+                    </div>
+                    <div class="col">
+                        <h4> {{det.name}}</h4>
+                        <p>{{det.description }}</p> 
+                    </div>
+                  </div>
+            </div>
+            <!-- <h5 *ngIf="!details.length"> Ups!!!, Information not available..., try other comic</h5>  -->    
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
