@@ -9,7 +9,6 @@ import {ComicService} from '../comic.service'
 export class ComicsComponent implements OnInit {
   comics:any = []
   details:any = []
-  characters:any = []
   pag = [
     {id:1, active:'active'},
     {id:2, active:''},
@@ -32,6 +31,7 @@ export class ComicsComponent implements OnInit {
   }
 
   getDetails(url:any){
+    this.details = []
     this.comicService.getData(url)
     .subscribe((ele:any)=>{
       if (ele.data.count) {
@@ -39,9 +39,7 @@ export class ComicsComponent implements OnInit {
       }else{
         this.comicService.characters(`https://gateway.marvel.com:443/v1/public/characters?limit=5&offset=${Math.floor(Math.random() * 1000)}`)
         .subscribe((ele:any)=>{
-          this.characters = ele.data.results
-          console.log(this.characters);
-          
+          this.details = ele.data.results
         })
       }
     })
