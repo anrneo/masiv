@@ -14,8 +14,8 @@ export class ComicService {
     return this.http.get(`https://gateway.marvel.com:443/v1/public/comics?limit=10&offset=${id*100}&apikey=${this.apikey}`)
   }
 
-  getData(url:any){
-    return this.http.get(url+'?apikey='+this.apikey)
+  getData(id:any){
+    return this.http.get(`https://gateway.marvel.com:443/v1/public/comics/${id}/characters?apikey=${this.apikey}`)
   }
 
   characters(url:any){

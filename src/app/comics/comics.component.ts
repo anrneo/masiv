@@ -30,9 +30,9 @@ export class ComicsComponent implements OnInit {
    
   }
 
-  getDetails(url:any){
+  getDetails(id:any){
     this.details = []
-    this.comicService.getData(url)
+    this.comicService.getData(id)
     .subscribe((ele:any)=>{
       if (ele.data.count) {
         this.details = ele.data.results
@@ -46,7 +46,6 @@ export class ComicsComponent implements OnInit {
   }
 
   paginate(id:any){
-    
     this.pag.map((ele:any)=>{
         if (ele.id==id) {
           ele.active = 'active'
@@ -65,7 +64,6 @@ export class ComicsComponent implements OnInit {
           ele.is = true
         }
       })
-      
      })
   }
 
@@ -73,7 +71,6 @@ export class ComicsComponent implements OnInit {
     let array = []
     for (let k = 0; k < st; k++) {
       array.push(k+1)
-      
     }
     this.comics[i].stars = array
   }
